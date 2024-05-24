@@ -22,7 +22,11 @@ const NavBar = () => {
         </Navbar.Collapse>
         <Navbar.Collapse className="justify-content-end">
             <NavDropdown title="Register/User" id="basic-nav-dropdown">
-            <NavDropdown.Item>Login</NavDropdown.Item>
+            <NavDropdown.Item>
+              <NavLink to="/login" className="nav-link">
+                Login
+              </NavLink>
+            </NavDropdown.Item>
               <NavDropdown.Item>Logout</NavDropdown.Item>
             </NavDropdown>
         </Navbar.Collapse>
