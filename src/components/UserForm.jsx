@@ -34,6 +34,7 @@ function UserForm({ route, method }) {
   };
 
   return (
+    <>
     <Container className="flex-column d-flex">
       <Form onSubmit={handleSubmit} className="col-md-4">
         <h1>{name}</h1>
@@ -58,6 +59,7 @@ function UserForm({ route, method }) {
         </Row>
       </Form>
     </Container>
+    </>
   );
 }
 
