@@ -1,12 +1,12 @@
 import React from 'react'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
-import NavBar from './components/NavBar'
 import Home from './pages/Home'
 import Login from './pages/auth/Login'
 import Register from './pages/auth/Register'
 import NotFound from './pages/NotFound'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import IncidentsList from './pages/IncidentsList'
+import IncidentCreate from './pages/IncidentCreate'
 import IncidentDetails from './pages/IncidentDetails'
 
 function Logout() {
@@ -28,7 +28,8 @@ function App() {
         <Route path="/logout" element={<Logout />} />
         <Route path="/register" element={<Register />} />
         <Route path="/incident" element={<IncidentsList  />} />
-        <Route path="/incident/create" element={<IncidentDetails />} />
+        <Route path="/incident/create" element={<IncidentCreate />} />
+        <Route path="/incident/:id" element={<IncidentDetails />} />
         <Route path="*" element={<NotFound />}></Route>
       </Routes>
     </BrowserRouter>
