@@ -6,6 +6,8 @@ import Login from './pages/auth/Login'
 import Register from './pages/auth/Register'
 import NotFound from './pages/NotFound'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import IncidentsList from './pages/IncidentsList'
+import IncidentDetails from './pages/IncidentDetails'
 
 function Logout() {
   localStorage.clear();
@@ -25,6 +27,8 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/logout" element={<Logout />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/incident" element={<IncidentsList  />} />
+        <Route path="/incident/create" element={<IncidentDetails />} />
         <Route path="*" element={<NotFound />}></Route>
       </Routes>
     </BrowserRouter>
