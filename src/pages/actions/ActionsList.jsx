@@ -43,6 +43,7 @@ const ActionsList = () => {
       <Container>
         <Container className="">
         <h1>Actions</h1>
+        <Button variant="secondary" className="m-2" onClick={() => navigate(`/incident/${incidentId}`)}>Back to incident</Button>
         <Button variant="success" className="m-2" onClick={() => navigate(`/action/create/${incidentId}`)}>New Action</Button>
         </Container>
         <Table striped bordered hover>

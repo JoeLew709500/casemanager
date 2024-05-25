@@ -116,6 +116,7 @@ function IncidentForm({ mode }) {
       <Container>
         <div>
           <h1>{title}</h1>
+          <Button onClick={() => navigate("/incident")} className="m-2" variant="secondary">Back to incidents</Button>
           <Form onSubmit={mode === "Update" ? updateIncident : createIncident}>
             <Form.Label>Location:</Form.Label>
             <Form.Control
