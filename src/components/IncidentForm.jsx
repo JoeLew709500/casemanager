@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import api from "../drf.js";
 import NavBar from "../components/NavBar.jsx";
-import { Container, Form , Button } from "react-bootstrap";
+import { Container, Form, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
-function IncidentForm({mode}) {
+function IncidentForm({ mode }) {
   const [location, setLocation] = useState("");
   const [incident_category, setIncidentCategory] = useState("");
   const [received_on, setReceivedOn] = useState("");
@@ -89,17 +89,15 @@ function IncidentForm({mode}) {
       .catch((error) => alert(error));
   };
 
-
-
   const formatDate = (dateString) => {
     if (!dateString) {
       return "";
     }
     const date = new Date(dateString);
     const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const day = String(date.getDate()).padStart(2, '0');
-  
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+
     return `${year}-${month}-${day}`;
   };
 
@@ -111,7 +109,7 @@ function IncidentForm({mode}) {
       .then((res) => {
         if (res.status === 204) {
           alert("Incident deleted");
-            navigate("/incident");
+          navigate("/incident");
         } else {
           alert("Failed to delete incident");
         }
@@ -119,16 +117,14 @@ function IncidentForm({mode}) {
       .catch((error) => {
         console.error("Error deleting incident:", error);
       });
-  }
-
-
+  };
   return (
     <>
       <NavBar />
       <Container>
         <div>
           <h1>{title}</h1>
-          <Form onSubmit={mode === 'Update' ? updateIncident : createIncident}>
+          <Form onSubmit={mode === "Update" ? updateIncident : createIncident}>
             <Form.Label>Location:</Form.Label>
             <Form.Control
               type="text"
@@ -188,8 +184,23 @@ function IncidentForm({mode}) {
               value={formatDate(closed_on)}
               onChange={(e) => setClosedOn(e.target.value)}
             />
-            <Button type="submit" className="m-2">{mode}</Button>
-            <Button onClick={() => deleteIncident(id)} className="m-2" variant="danger">Delete</Button>
+            <Button type="submit" className="m-2">
+              {mode}
+            </Button>
+            <Button
+              onClick={() => deleteIncident(id)}
+              className="m-2"
+              variant="danger"
+            >
+              Delete
+            </Button>
+            <Button
+              className="m-2"
+              variant="success"
+              onClick={() => navigate(`/actions/${id}`)}
+            >
+              Actions
+            </Button>
           </Form>
         </div>
       </Container>

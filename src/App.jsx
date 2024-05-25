@@ -8,6 +8,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import IncidentsList from './pages/IncidentsList'
 import IncidentCreate from './pages/IncidentCreate'
 import IncidentDetails from './pages/IncidentDetails'
+import ActionCreate from './pages/actions/ActionCreate'
+import ActionDetails from './pages/actions/ActionDetails'
+import ActionsList from './pages/actions/ActionsList'
+
 
 function Logout() {
   localStorage.clear();
@@ -30,6 +34,9 @@ function App() {
         <Route path="/incident" element={<IncidentsList  />} />
         <Route path="/incident/create" element={<IncidentCreate />} />
         <Route path="/incident/:id" element={<IncidentDetails />} />
+        <Route path="/actions/:id" element={<ActionsList />} />
+        <Route path="/action/create/:id" element={<ActionCreate />} />
+        <Route path="/action/:id" element={<ActionDetails />} />
         <Route path="*" element={<NotFound />}></Route>
       </Routes>
     </BrowserRouter>
