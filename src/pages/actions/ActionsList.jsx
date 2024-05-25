@@ -33,6 +33,10 @@ const ActionsList = () => {
     return `${day}/${month}/${year}`;
   };
 
+  const handleRowClick = (id) => {
+    navigate(`/action/${id}`);
+  };
+
   return (
     <>
       <NavBar />

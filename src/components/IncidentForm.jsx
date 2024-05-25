@@ -24,14 +24,6 @@ function IncidentForm({ mode }) {
           details,
           closed_on,
         },
-        console.log(
-          "Uploaded Incident:",
-          location,
-          incident_category,
-          received_on,
-          details,
-          closed_on
-        )
       )
       .then((res) => {
         if (res.status === 201) alert("Incident created");
