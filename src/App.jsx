@@ -11,6 +11,7 @@ import IncidentDetails from './pages/IncidentDetails'
 import ActionCreate from './pages/actions/ActionCreate'
 import ActionDetails from './pages/actions/ActionDetails'
 import ActionsList from './pages/actions/ActionsList'
+import PhotosList from './pages/photos/PhotosList'
 
 
 function Logout() {
@@ -38,6 +39,7 @@ function App() {
         <Route path="/action/create/:id" element={<ActionCreate />} />
         <Route path="/action/:id" element={<ActionDetails />} />
         <Route path="*" element={<NotFound />}></Route>
+        <Route path="/photos/:id" element={<PhotosList />} />
       </Routes>
     </BrowserRouter>
   )

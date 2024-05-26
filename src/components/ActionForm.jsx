@@ -154,15 +154,13 @@ const ActionForm = ({mode}) => {
             />
           </Form.Group>
 
-          {/* Add other form groups as needed */}
-
           <Button variant="primary" type="submit" className="m-2">
             {mode}
           </Button>
           <Button variant="danger" onClick={() => deleteAction(actionId,action.incident)} className="m-2">
             Delete
           </Button>
-          <Button variant="success" onClick={() => deleteAction(actionId,action.incident)} className="m-2">
+          <Button variant="success" onClick={() => navigate(`/photos/${actionId}`)} className="m-2">
             Photos
           </Button>
         </Form>
