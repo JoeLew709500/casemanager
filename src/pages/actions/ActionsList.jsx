@@ -11,6 +11,9 @@ const ActionsList = () => {
   let incidentId = window.location.pathname.split("/").pop();
 
   const getActions = async () => {
+    /**
+     * This function is used to get the list of actions from the API using the incident id.
+     */
     try {
       const res = await api.get(`/actions/list/${incidentId}/`);
       console.log("Response:", res.data);
@@ -25,6 +28,9 @@ const ActionsList = () => {
   }, []);
   
   const formatDate = (dateString) => {
+    /**
+     * This function is used to format the date string to a more readable format.
+     */
     const date = new Date(dateString);
     const year = date.getFullYear();
     const month = String(date.getMonth() + 1).padStart(2, '0');

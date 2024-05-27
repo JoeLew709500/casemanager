@@ -20,6 +20,9 @@ const ActionForm = ({ mode }) => {
   });
 
   const getAction = (id) => {
+    /**
+     * This function is used to get the action details from the API using the action id.
+     */
     api
       .get(`/actions/${id}/`)
       .then((res) => {
@@ -49,6 +52,9 @@ const ActionForm = ({ mode }) => {
   };
 
   const handleSubmit = (e) => {
+    /** 
+     * This function is used to handle the form submission. It validates the form and sends a POST request to the API to create a new action.
+     */
     e.preventDefault();
     if (validateForm()) {
     api
@@ -61,6 +67,9 @@ const ActionForm = ({ mode }) => {
   }};
 
   const formatDate = (dateString) => {
+    /**
+     * This function is used to format the date string to the format 'YYYY-MM-DD'.
+     */
     if (!dateString) {
       return "";
     }
@@ -73,6 +82,9 @@ const ActionForm = ({ mode }) => {
   };
 
   const deleteAction = (actionId, incidentId) => {
+    /** 
+     * This function is used to delete an action from the API using the action id.
+     */
     api
       .delete(`/actions/delete/${actionId}/`)
       .then((res) => {
@@ -83,6 +95,9 @@ const ActionForm = ({ mode }) => {
   };
 
   const updateAction = (e) => {
+    /** 
+     * This function is used to update an action in the API using the action id.
+     */
     e.preventDefault();
     api
       .put(`/actions/${actionId}/`, {
@@ -105,6 +120,9 @@ const ActionForm = ({ mode }) => {
   const [errors, setErrors] = useState({});
 
   const validateForm = () => {
+    /**
+     * This function is used to validate the form. It checks if the action_code, details and completed_on fields are not empty and sets the form errors if they are.
+     */
     let newErrors = {};
 
     // Add validation for action_code

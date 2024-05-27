@@ -10,6 +10,9 @@ const NavBar = () => {
   let [username, setUsername] = useState("");
 
   const getUser = async () => {
+    /** 
+     * This function is used to get the username of the current user from the API.
+     */
     try {
       const token = localStorage.getItem(ACCESS_TOKEN);
       const decoded = jwtDecode(token);

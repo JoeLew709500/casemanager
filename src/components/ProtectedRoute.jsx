@@ -12,6 +12,11 @@ function ProtectedRoute({ children }) {
   }, []);
 
   const refreshToken = async () => {
+    /**
+     * This function is used to refresh the access token using the refresh token.
+     * If the refresh token is valid, the access token is updated and the user is authorized.
+     * If the refresh token is invalid, the user is not authorized.
+     */
     const refreshToken = localStorage.getItem(REFRESH_TOKEN);
     try {
       const res = await api.post("/authusers/token/refresh/", {
@@ -30,6 +35,9 @@ function ProtectedRoute({ children }) {
   };
 
   const auth = async () => {
+    /**
+     * This function is used to check if the user is authorized to access the protected route.
+     */
     const token = localStorage.getItem(ACCESS_TOKEN);
     if (!token) {
       setIsAuthorized(false);

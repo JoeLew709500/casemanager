@@ -13,6 +13,10 @@ function IncidentForm({ mode }) {
   const navigate = useNavigate();
 
   const createIncident = (e) => {
+    /**
+     * This function is used to handle the form submission. It validates the form and sends a POST request to the API to create a new incident.
+     * If the form is valid and the request is successful, the user is redirected to the incident details page.
+     */
     e.preventDefault();
     if (!validateForm()) {
       return;
@@ -34,6 +38,9 @@ function IncidentForm({ mode }) {
   let id = window.location.pathname.split("/").pop();
 
   const getIncidents = (id) => {
+    /**
+     * This function is used to get the incident details from the API using the incident id.
+     */
     api
       .get(`/incident/${id}/`)
       .then((res) => {
@@ -57,6 +64,9 @@ function IncidentForm({ mode }) {
   }, [id]);
 
   const updateIncident = (e) => {
+    /**
+     * This function is used to handle the form submission. It sends a PUT request to the API to update an existing incident.
+     */
     e.preventDefault();
     api
       .put(
@@ -85,6 +95,9 @@ function IncidentForm({ mode }) {
   };
 
   const formatDate = (dateString) => {
+    /** 
+     * This function is used to format the date string in the format YYYY-MM-DD.
+     */
     if (!dateString) {
       return "";
     }
@@ -99,6 +112,9 @@ function IncidentForm({ mode }) {
   let title = id ? `Incident - ${id}` : "New Incident";
 
   const deleteIncident = (id) => {
+    /**
+     * This function is used to delete an incident from the API using the incident id.
+     */
     api
       .delete(`/incident/delete/${id}/`)
       .then((res) => {
@@ -118,6 +134,9 @@ function IncidentForm({ mode }) {
   const [errors, setErrors] = useState({});
 
   const validateForm = () => {
+    /**
+     * This function is used to validate the form. It checks if the location, incident_category, received_on, and details fields are not empty and sets the form errors if they are.
+     */
     let newErrors = {};
 
     // Add validation for location

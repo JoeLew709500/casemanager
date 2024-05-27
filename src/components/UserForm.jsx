@@ -14,6 +14,9 @@ function UserForm({ route, method }) {
   const name = method === "login" ? "Login" : "Register";
 
   const handleSubmit = async (e) => {
+    /**
+    * This function is used to handle the form submission. It validates the form and sends a POST request to the API to either login or register a user.
+    */
     setLoading(true);
     e.preventDefault();
 
@@ -40,6 +43,9 @@ function UserForm({ route, method }) {
   const [formErrors, setFormErrors] = useState({});
 
   const validateForm = () => {
+    /**
+     * This function is used to validate the form. It checks if the username and password fields are not empty and sets the form errors if they are.
+     */
     let errors = {};
 
     if (!username) {

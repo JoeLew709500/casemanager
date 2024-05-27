@@ -10,6 +10,9 @@ const IncidentsList = () => {
 
 
   const getIncidents = async () => {
+    /** 
+     * This function is used to get the list of incidents from the API.
+     */
     try {
       const res = await api.get("/incident/");
       console.log("Response:", res.data);
@@ -28,6 +31,9 @@ const IncidentsList = () => {
   };
 
   const formatDate = (dateString) => {
+    /**
+     * This function is used to format the date string to a more readable format.
+     */
     const date = new Date(dateString);
     const year = date.getFullYear();
     const month = String(date.getMonth() + 1).padStart(2, '0');

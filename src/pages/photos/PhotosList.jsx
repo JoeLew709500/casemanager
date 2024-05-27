@@ -9,6 +9,9 @@ const cloudinary = import.meta.env.VITE_CLOUDINARY_CLOUD_URL
 const API_URL = import.meta.env.VITE_API_URL
 
 const PhotosList = () => {
+    /**
+     * This component is used to display the list of photos for an action.
+     */
     const [photos, setPhotos] = useState([
         {
             image: "",
@@ -25,6 +28,9 @@ const PhotosList = () => {
     };
 
     const getPhotos = async () => {
+        /** 
+         * This function is used to get the list of photos for an action from the API.
+         */
         console.log("Action ID:", actionId);
         try {
             const res = await api.get(`/actions/photo/${actionId}/`);
@@ -40,6 +46,9 @@ const PhotosList = () => {
     }, []);
 
     const createPhoto = async (e) => {
+        /** 
+         * This function is used to handle the form submission. It validates the form and sends a POST request to the API to create a new photo for an action.
+         */
         e.preventDefault();
 
         const formData = new FormData();
@@ -61,6 +70,9 @@ const PhotosList = () => {
     };
 
     const deletePhoto = async (id) => {
+        /**
+         * This function is used to delete a photo from the API.
+         */
         try {
             const response = await api.delete(`/actions/photo/delete/${id}/`);
             console.log(response.data);
