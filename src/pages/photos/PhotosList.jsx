@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Container, Button, Form } from "react-bootstrap";
+import { Container, Button, Form, Row } from "react-bootstrap";
 import NavBar from "../../components/NavBar";
 import api from "../../drf";
 import axios from 'axios';
@@ -7,8 +7,6 @@ import { ACCESS_TOKEN } from "../../constants";
 
 const cloudinary = import.meta.env.VITE_CLOUDINARY_CLOUD_URL
 const API_URL = import.meta.env.VITE_API_URL
-
-console.log("API_URL:", API_URL, "CLOUDINARY_CLOUD_URL:", cloudinary);
 
 const PhotosList = () => {
     const [photos, setPhotos] = useState([
@@ -61,6 +59,16 @@ const PhotosList = () => {
         }
     };
 
+    const deletePhoto = async (id) => {
+        try {
+            const response = await api.delete(`/actions/photo/delete/${id}/`);
+            console.log(response.data);
+            getPhotos();
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
     return (
         <>
         <NavBar />
@@ -70,13 +78,20 @@ const PhotosList = () => {
                 <Button type="submit">Upload Photo</Button>
             </Form>
             <Container>
-                <ul>
                     {photos.map((image) => (
-                        <li key={image.id}>
-                            <img src={cloudinary + image.photo} />
-                        </li>
+                        <Row className="mt-3">
+                            <div className="col-md-4">
+                                <div className="card mt-2">
+
+                                    <img src={cloudinary + image.photo} className="card-img-top" alt="..." />
+                                    <Button onClick={() => deletePhoto(image.id)}>
+                                        Delete
+                                    </Button>
+                                </div>
+                            </div>
+
+                        </Row>
                     ))}
-                </ul>
         </Container>
         </Container>
         </>
