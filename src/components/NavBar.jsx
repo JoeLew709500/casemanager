@@ -45,12 +45,17 @@ const NavBar = () => {
         <Navbar.Collapse className="justify-content-end">
           <NavDropdown title={username} id="basic-nav-dropdown">
             <NavDropdown.Item>
-              <NavLink to="/login" className="nav-link">
+              <NavLink to="/login" className="nav-link" style={username === 'Login/Register' ? {} : { display: "none" }}>
                 Login
               </NavLink>
             </NavDropdown.Item>
             <NavDropdown.Item>
-              <NavLink to="/logout" className="nav-link">
+            <NavLink to="/register" className="nav-link" style={username === 'Login/Register' ? {} : { display: "none" }}>
+                Register
+              </NavLink>
+            </NavDropdown.Item>
+            <NavDropdown.Item>
+              <NavLink to="/logout" className="nav-link" style={username === 'Login/Register' ? { display: "none" } : {}}>
                 Logout
               </NavLink>
             </NavDropdown.Item>
