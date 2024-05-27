@@ -1,6 +1,6 @@
 import { useState } from "react";
 import api from "../drf";
-import { Form, Button, Row, Container } from "react-bootstrap";
+import { Form, Button, Alert, Container } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { ACCESS_TOKEN, REFRESH_TOKEN } from "../constants";
 
@@ -16,6 +16,10 @@ function UserForm({ route, method }) {
   const handleSubmit = async (e) => {
     setLoading(true);
     e.preventDefault();
+
+    if (!validateForm()) {
+      return;
+    }
 
     try {
       const res = await api.post(route, { username, password });
@@ -33,6 +37,23 @@ function UserForm({ route, method }) {
     }
   };
 
+  const [formErrors, setFormErrors] = useState({});
+
+  const validateForm = () => {
+    let errors = {};
+
+    if (!username) {
+      errors.username = "Username is required";
+    }
+
+    if (!password) {
+      errors.password = "Password is required";
+    }
+
+    setFormErrors(errors);
+    return Object.keys(errors).length === 0;;
+  }
+
   return (
     <>
     <Container className="flex-column d-flex">
@@ -46,6 +67,7 @@ function UserForm({ route, method }) {
             onChange={(e) => setUsername(e.target.value)}
             placeholder="Username"
           />
+          {formErrors.username && <Alert>{formErrors.username}</Alert>}
         </Form.Group>
         
         <Form.Group className="mb-2">
@@ -55,6 +77,7 @@ function UserForm({ route, method }) {
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Password"
           />
+          {formErrors.password && <Alert>{formErrors.password}</Alert>}
         </Form.Group>
           <Button type="submit">{name}</Button>
       </Form>
