@@ -18,20 +18,17 @@ function IncidentForm({ mode }) {
       return;
     }
     api
-      .post(
-        "/incident/create/",
-        {
-          location,
-          incident_category,
-          received_on,
-          details,
-          closed_on,
-        },
-      )
+      .post("/incident/create/", {
+        location,
+        incident_category,
+        received_on,
+        details,
+        closed_on,
+      })
       .then((res) => {
         if (res.status === 201) navigate(`/incident/${res.data.id}`);
         else alert("Failed to create incident");
-      })
+      });
   };
 
   let id = window.location.pathname.split("/").pop();
@@ -51,8 +48,8 @@ function IncidentForm({ mode }) {
           // Handle 404 error here
           navigate("/*");
         } else {
-          ;
-        }});
+        }
+      });
   };
 
   useEffect(() => {
@@ -120,41 +117,47 @@ function IncidentForm({ mode }) {
   // Form Validation
   const [errors, setErrors] = useState({});
 
-const validateForm = () => {
-  let newErrors = {};
+  const validateForm = () => {
+    let newErrors = {};
 
-  // Add validation for location
-  if (!location) {
-    newErrors.location = 'Location is required';
-  }
+    // Add validation for location
+    if (!location) {
+      newErrors.location = "Location is required";
+    }
 
-  // Add validation for incident_category
-  if (!incident_category || incident_category === 'Choose...') {
-    newErrors.incident_category = 'Please select a valid incident category';
-  }
+    // Add validation for incident_category
+    if (!incident_category || incident_category === "Choose...") {
+      newErrors.incident_category = "Please select a valid incident category";
+    }
 
-  // Add validation for received_on
-  if (!received_on) {
-    newErrors.received_on = 'Received on is required';
-  }
+    // Add validation for received_on
+    if (!received_on) {
+      newErrors.received_on = "Received on is required";
+    }
 
-  // Add validation for details
-  if (!details) {
-    newErrors.details = 'Details are required';
-  }
+    // Add validation for details
+    if (!details) {
+      newErrors.details = "Details are required";
+    }
 
-  setErrors(newErrors);
+    setErrors(newErrors);
 
-  // If no errors, return true, else return false
-  return Object.keys(newErrors).length === 0;
-};
+    // If no errors, return true, else return false
+    return Object.keys(newErrors).length === 0;
+  };
   return (
     <>
       <NavBar />
       <Container>
         <div>
           <h1>{title}</h1>
-          <Button onClick={() => navigate("/incident")} className="m-2" variant="secondary">Back to incidents</Button>
+          <Button
+            onClick={() => navigate("/incident")}
+            className="m-2"
+            variant="secondary"
+          >
+            Back to incidents
+          </Button>
           <Form onSubmit={mode === "Update" ? updateIncident : createIncident}>
             <Form.Label>Location:</Form.Label>
             <Form.Control
@@ -195,7 +198,9 @@ const validateForm = () => {
                 ASB (Anti-Social Behaviour)
               </option>
             </Form.Select>
-            {errors.incident_category && <Alert>{errors.incident_category}</Alert>}
+            {errors.incident_category && (
+              <Alert>{errors.incident_category}</Alert>
+            )}
             <Form.Label>Received on:</Form.Label>
             <Form.Control
               type="date"
@@ -231,6 +236,7 @@ const validateForm = () => {
               Delete
             </Button>
             <Button
+              style={mode === "Update" ? {} : { display: "none"}}
               className="m-2"
               variant="success"
               onClick={() => navigate(`/actions/${id}`)}

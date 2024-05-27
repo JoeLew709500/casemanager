@@ -192,7 +192,7 @@ const ActionForm = ({ mode }) => {
           >
             Delete
           </Button>
-          <Button
+          <Button style={mode === "Update" ? {} : {display: "none"}}
             variant="success"
             onClick={() => navigate(`/photos/${actionId}`)}
             className="m-2"

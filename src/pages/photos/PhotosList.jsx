@@ -47,7 +47,7 @@ const PhotosList = () => {
         formData.append('action_id', actionId);
     
         try {
-            const response = await axios.post(`${API_URL}/actions/photo/`, formData, {
+            const response = await axios.post(`${API_URL}/actions/photo/${actionId}/`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                     'Authorization': 'Bearer ' + localStorage.getItem(ACCESS_TOKEN)
