@@ -30,7 +30,7 @@ const NavBar = () => {
   return (
     <Navbar className="bg-body-tertiary" expand="lg">
       <Container>
-        <Navbar.Brand href="#home">Case Manager</Navbar.Brand>
+        <Navbar.Brand href="/">Case Manager</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
