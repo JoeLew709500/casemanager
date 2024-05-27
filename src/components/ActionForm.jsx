@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { Form, Button, Container } from "react-bootstrap";
+import { Form, Button, Container, Alert } from "react-bootstrap";
 import NavBar from "./NavBar";
 import api from "../drf";
 import { useNavigate } from "react-router-dom";
 
-const ActionForm = ({mode}) => {
+const ActionForm = ({ mode }) => {
   const navigate = useNavigate();
   const [actionId, setActionId] = useState("");
 
   let incidentId = window.location.pathname.split("/").pop();
 
-  let id = incidentId
+  let id = incidentId;
 
   const [action, setAction] = useState({
     action_code: "",
@@ -18,7 +18,6 @@ const ActionForm = ({mode}) => {
     incident: incidentId,
     completed_on: "",
   });
-
 
   const getAction = (id) => {
     api
@@ -32,10 +31,11 @@ const ActionForm = ({mode}) => {
       });
   };
 
-  useEffect(() => {
-    console.log("Running effect");
-    getAction(id);
-  }, [id]);
+  if (mode === "Update") {
+    useEffect(() => {
+      getAction(id);
+    }, [id]);
+  }
 
   const handleChange = (e) => {
     setAction({
@@ -46,16 +46,15 @@ const ActionForm = ({mode}) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (validateForm()) {
     api
       .post("/actions/create/", action)
       .then((res) => {
         if (res.status === 201) {
-            alert("Action created");
-            navigate(`/actions/${incidentId}`);
-         } else alert("Failed to create action");
+          navigate(`/actions/${incidentId}`);
+        } else alert("Failed to create action");
       })
-      .catch((error) => alert(error));
-  };
+  }};
 
   const formatDate = (dateString) => {
     if (!dateString) {
@@ -69,7 +68,7 @@ const ActionForm = ({mode}) => {
     return `${year}-${month}-${day}`;
   };
 
-  const deleteAction = (actionId,incidentId) => {
+  const deleteAction = (actionId, incidentId) => {
     api
       .delete(`/actions/delete/${actionId}/`)
       .then((res) => {
@@ -80,42 +79,67 @@ const ActionForm = ({mode}) => {
           alert("Failed to delete action");
         }
       })
-      .catch((error) => {
-        console.error("Error deleting action:", error);
-      });
   };
 
   const updateAction = (e) => {
     e.preventDefault();
     api
-      .put(
-        `/actions/${actionId}/`,
-        {
-          action_code: action.action_code,
-          details: action.details,
-          incident: action.incident,
-          completed_on: action.completed_on,
-        },
-      )
+      .put(`/actions/${actionId}/`, {
+        action_code: action.action_code,
+        details: action.details,
+        incident: action.incident,
+        completed_on: action.completed_on,
+      })
       .then((res) => {
         if (res.status === 200) {
-            alert("Action updated");
-            navigate(`/actions/${incident}`);
+          navigate(`/actions/${incident}`);
         } else alert("Failed to update action");
       })
-      .catch((error) => alert(error));
-  }
+  };
 
   const title = actionId ? `Action - ${actionId}` : "New Action";
   let incident = actionId ? action.incident : incidentId;
 
+  // Form Validation
+  const [errors, setErrors] = useState({});
+
+  const validateForm = () => {
+    let newErrors = {};
+
+    // Add validation for action_code
+    if (!action.action_code || action.action_code === 'Choose...') {
+      newErrors.action_code = "Action code is required";
+    }
+
+    // Add validation for details
+    if (!action.details) {
+      newErrors.details = "Details are required";
+    }
+
+    // Add validation for completed_on
+    if (!action.completed_on) {
+      newErrors.completed_on = "Completed on date is required";
+    }
+
+    setErrors(newErrors);
+
+    // If no errors, return true, else return false
+    return Object.keys(newErrors).length === 0;
+  };
+
   return (
     <>
       <NavBar />
-        <Container>
+      <Container>
         <h1>{title}</h1>
-        <Button className="m-2" variant="secondary" onClick={() => navigate(`/actions/${incident}`)}>Back to actions</Button>
-        <Form onSubmit={mode === 'Update' ? updateAction : handleSubmit}>
+        <Button
+          className="m-2"
+          variant="secondary"
+          onClick={() => navigate(`/actions/${incident}`)}
+        >
+          Back to actions
+        </Button>
+        <Form onSubmit={mode === "Update" ? updateAction : handleSubmit}>
           <Form.Group controlId="code">
             <Form.Label>Code</Form.Label>
             <Form.Select
@@ -132,17 +156,19 @@ const ActionForm = ({mode}) => {
                 Out going communications
               </option>
             </Form.Select>
+            {errors.action_code && <Alert>{errors.action_code}</Alert>}
+          </Form.Group>
 
-            <Form.Group controlId="detail">
-              <Form.Label>Detail</Form.Label>
-              <Form.Control
-                as="textarea"
-                rows={5}
-                name="details"
-                value={action.details}
-                onChange={handleChange}
-              />
-            </Form.Group>
+          <Form.Group controlId="details">
+            <Form.Label>Detail</Form.Label>
+            <Form.Control
+              as="textarea"
+              rows={5}
+              name="details"
+              value={action.details}
+              onChange={handleChange}
+            />
+            {errors.details && <Alert>{errors.details}</Alert>}
           </Form.Group>
           <Form.Group controlId="completed_on">
             <Form.Label>Completed On</Form.Label>
@@ -152,15 +178,24 @@ const ActionForm = ({mode}) => {
               value={formatDate(action.completed_on)}
               onChange={handleChange}
             />
+            {errors.completed_on && <Alert>{errors.completed_on}</Alert>}
           </Form.Group>
 
           <Button variant="primary" type="submit" className="m-2">
             {mode}
           </Button>
-          <Button variant="danger" onClick={() => deleteAction(actionId,action.incident)} className="m-2">
+          <Button
+            variant="danger"
+            onClick={() => deleteAction(actionId, action.incident)}
+            className="m-2"
+          >
             Delete
           </Button>
-          <Button variant="success" onClick={() => navigate(`/photos/${actionId}`)} className="m-2">
+          <Button
+            variant="success"
+            onClick={() => navigate(`/photos/${actionId}`)}
+            className="m-2"
+          >
             Photos
           </Button>
         </Form>
