@@ -25,12 +25,13 @@ const PhotosList = () => {
     };
 
     const getPhotos = async () => {
+        console.log("Action ID:", actionId);
         try {
-            const res = await api.get("/actions/photo/");
+            const res = await api.get(`/actions/photo/${actionId}/`);
             console.log("Response:", res.data);
             setPhotos(res.data);
-        } catch (error) {
-            console.log(error);
+        } catch(error) {
+            console.error(error);
         }
     };
 
