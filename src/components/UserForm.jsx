@@ -27,7 +27,7 @@ function UserForm({ route, method }) {
         navigate("/login");
       }
     } catch (error) {
-      alert(error);
+      alert('Failed to login. Please try again.');
     } finally {
       setLoading(false);
     }

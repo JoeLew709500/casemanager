@@ -34,7 +34,7 @@ function RegisterUserForm({ route, method }) {
           navigate("/login");
         }
       } catch (error) {
-        alert(error);
+        alert('Failed to register. Please try again.');
       } finally {
         setLoading(false);
       }
