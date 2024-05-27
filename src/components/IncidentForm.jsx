@@ -32,7 +32,6 @@ function IncidentForm({ mode }) {
         if (res.status === 201) navigate(`/incident/${res.data.id}`);
         else alert("Failed to create incident");
       })
-      .catch((error) => alert(error));
   };
 
   let id = window.location.pathname.split("/").pop();
@@ -52,7 +51,7 @@ function IncidentForm({ mode }) {
           // Handle 404 error here
           navigate("/*");
         } else {
-          alert(error);
+          ;
         }});
   };
 

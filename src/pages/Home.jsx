@@ -14,7 +14,7 @@ const Home = () => {
             <p>Your Public Protection Case Management System</p>
             <p>This site is to help you manage your UK Public Protection cases</p>
             <p>You can create incidents for each case</p>
-            <p>You can add your actions to each incident ie, a noticed you issued to an individual</p>
+            <p>You can add your actions to each incident ie, a notice you issued to an individual</p>
             <p>You can also add photos to each action to store copies of the evidence found</p>
         </div>
     </div>
