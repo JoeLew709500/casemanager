@@ -1,7 +1,13 @@
 import { useState, useEffect } from "react";
 import api from "../drf.js";
 import NavBar from "../components/NavBar.jsx";
-import { Container, Form, Button, Alert } from "react-bootstrap";
+import {
+  Container,
+  Form,
+  Button,
+  Alert,
+  Modal,
+  } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
 function IncidentForm({ mode }) {
@@ -11,6 +17,13 @@ function IncidentForm({ mode }) {
   const [details, setDetails] = useState("");
   const [closed_on, setClosedOn] = useState(null);
   const navigate = useNavigate();
+
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  const [modalTitle, setModalTitle] = useState("");
+
+  // let modalTitle = "";
 
   const createIncident = (e) => {
     /**
@@ -30,8 +43,9 @@ function IncidentForm({ mode }) {
         closed_on,
       })
       .then((res) => {
-        if (res.status === 201) navigate(`/incident/${res.data.id}`);
-        else alert("Failed to create incident");
+        if (res.status === 201) {
+          navigate(`/incident/${res.data.id}`);
+        } else alert("Failed to create incident");
       });
   };
 
@@ -77,25 +91,19 @@ function IncidentForm({ mode }) {
           received_on,
           details,
           closed_on,
-        },
-        console.log(
-          "Updated Incident:",
-          location,
-          incident_category,
-          received_on,
-          details,
-          closed_on
-        )
+        }
       )
       .then((res) => {
-        if (res.status === 200) alert("Incident updated");
-        else alert("Failed to update incident");
+        if (res.status === 200) {
+          setModalTitle("Incident updated");
+          handleShow();
+        } else alert("Failed to update incident");
       })
       .catch((error) => alert(error));
   };
 
   const formatDate = (dateString) => {
-    /** 
+    /**
      * This function is used to format the date string in the format YYYY-MM-DD.
      */
     if (!dateString) {
@@ -119,7 +127,6 @@ function IncidentForm({ mode }) {
       .delete(`/incident/delete/${id}/`)
       .then((res) => {
         if (res.status === 204) {
-          alert("Incident deleted");
           navigate("/incident");
         } else {
           alert("Failed to delete incident");
@@ -170,6 +177,11 @@ function IncidentForm({ mode }) {
       <Container>
         <div>
           <h1>{title}</h1>
+          <Modal show={show} onHide={handleClose}>
+            <Modal.Header closeButton>
+              <Modal.Title>{modalTitle}</Modal.Title>
+            </Modal.Header>
+          </Modal>
           <Button
             onClick={() => navigate("/incident")}
             className="m-2"
@@ -255,7 +267,7 @@ function IncidentForm({ mode }) {
               Delete
             </Button>
             <Button
-              style={mode === "Update" ? {} : { display: "none"}}
+              style={mode === "Update" ? {} : { display: "none" }}
               className="m-2"
               variant="success"
               onClick={() => navigate(`/actions/${id}`)}

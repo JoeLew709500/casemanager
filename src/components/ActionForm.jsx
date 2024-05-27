@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Form, Button, Container, Alert } from "react-bootstrap";
+import { Form, Button, Container, Alert, Modal } from "react-bootstrap";
 import NavBar from "./NavBar";
 import api from "../drf";
 import { useNavigate } from "react-router-dom";
@@ -7,6 +7,11 @@ import { useNavigate } from "react-router-dom";
 const ActionForm = ({ mode }) => {
   const navigate = useNavigate();
   const [actionId, setActionId] = useState("");
+
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  const [modalTitle, setModalTitle] = useState("");
 
   let incidentId = window.location.pathname.split("/").pop();
 
@@ -35,7 +40,8 @@ const ActionForm = ({ mode }) => {
           navigate("/*");
         } else {
           alert(error);
-        }});
+        }
+      });
   };
 
   if (mode === "Update") {
@@ -52,19 +58,18 @@ const ActionForm = ({ mode }) => {
   };
 
   const handleSubmit = (e) => {
-    /** 
+    /**
      * This function is used to handle the form submission. It validates the form and sends a POST request to the API to create a new action.
      */
     e.preventDefault();
     if (validateForm()) {
-    api
-      .post("/actions/create/", action)
-      .then((res) => {
+      api.post("/actions/create/", action).then((res) => {
         if (res.status === 201) {
           navigate(`/actions/${incidentId}`);
         } else alert("Failed to create action");
-      })
-  }};
+      });
+    }
+  };
 
   const formatDate = (dateString) => {
     /**
@@ -82,20 +87,18 @@ const ActionForm = ({ mode }) => {
   };
 
   const deleteAction = (actionId, incidentId) => {
-    /** 
+    /**
      * This function is used to delete an action from the API using the action id.
      */
-    api
-      .delete(`/actions/delete/${actionId}/`)
-      .then((res) => {
-        if (res.status === 204) {
-          navigate(`/actions/${incidentId}`);
-        }
-      })
+    api.delete(`/actions/delete/${actionId}/`).then((res) => {
+      if (res.status === 204) {
+        navigate(`/actions/${incidentId}`);
+      }
+    });
   };
 
   const updateAction = (e) => {
-    /** 
+    /**
      * This function is used to update an action in the API using the action id.
      */
     e.preventDefault();
@@ -109,8 +112,10 @@ const ActionForm = ({ mode }) => {
       .then((res) => {
         if (res.status === 200) {
           navigate(`/actions/${incident}`);
+          setModalTitle("Incident updated");
+          handleShow();
         } else alert("Failed to update action");
-      })
+      });
   };
 
   const title = actionId ? `Action - ${actionId}` : "New Action";
@@ -126,7 +131,7 @@ const ActionForm = ({ mode }) => {
     let newErrors = {};
 
     // Add validation for action_code
-    if (!action.action_code || action.action_code === 'Choose...') {
+    if (!action.action_code || action.action_code === "Choose...") {
       newErrors.action_code = "Action code is required";
     }
 
@@ -151,6 +156,11 @@ const ActionForm = ({ mode }) => {
       <NavBar />
       <Container>
         <h1>{title}</h1>
+        <Modal show={show} onHide={handleClose}>
+          <Modal.Header closeButton>
+            <Modal.Title>{modalTitle}</Modal.Title>
+          </Modal.Header>
+        </Modal>
         <Button
           className="m-2"
           variant="secondary"
@@ -210,7 +220,8 @@ const ActionForm = ({ mode }) => {
           >
             Delete
           </Button>
-          <Button style={mode === "Update" ? {} : {display: "none"}}
+          <Button
+            style={mode === "Update" ? {} : { display: "none" }}
             variant="success"
             onClick={() => navigate(`/photos/${actionId}`)}
             className="m-2"
