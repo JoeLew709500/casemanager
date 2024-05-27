@@ -77,10 +77,7 @@ const ActionForm = ({ mode }) => {
       .delete(`/actions/delete/${actionId}/`)
       .then((res) => {
         if (res.status === 204) {
-          alert("Action deleted");
           navigate(`/actions/${incidentId}`);
-        } else {
-          alert("Failed to delete action");
         }
       })
   };
