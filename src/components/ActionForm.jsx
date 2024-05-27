@@ -27,8 +27,12 @@ const ActionForm = ({ mode }) => {
         setActionId(res.data.id);
       })
       .catch((error) => {
-        console.error("Error fetching action:", error);
-      });
+        if (error.response && error.response.status === 404) {
+          // Handle 404 error here
+          navigate("/*");
+        } else {
+          alert(error);
+        }});
   };
 
   if (mode === "Update") {

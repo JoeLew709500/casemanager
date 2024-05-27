@@ -48,8 +48,12 @@ function IncidentForm({ mode }) {
         setClosedOn(res.data.closed_on);
       })
       .catch((error) => {
-        console.error("Error fetching incident:", error);
-      });
+        if (error.response && error.response.status === 404) {
+          // Handle 404 error here
+          navigate("/*");
+        } else {
+          alert(error);
+        }});
   };
 
   useEffect(() => {
