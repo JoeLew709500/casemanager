@@ -53,7 +53,7 @@ const PhotosList = () => {
                 }
             });
     
-            console.log(response.data);
+            getPhotos();
         } catch (error) {
             console.error(error);
         }
@@ -77,21 +77,20 @@ const PhotosList = () => {
                 <input type="file" onChange={handleFileChange} />
                 <Button type="submit">Upload Photo</Button>
             </Form>
+            <Button variant="secondary" className="m-2" onClick={() => window.history.back()}>Back to action</Button>
             <Container>
+            <Row className="mt-3">
                     {photos.map((image) => (
-                        <Row className="mt-3">
                             <div className="col-md-4">
                                 <div className="card mt-2">
-
                                     <img src={cloudinary + image.photo} className="card-img-top" alt="..." />
-                                    <Button onClick={() => deletePhoto(image.id)}>
+                                    <Button variant="danger" onClick={() => deletePhoto(image.id)}>
                                         Delete
                                     </Button>
                                 </div>
                             </div>
-
-                        </Row>
                     ))}
+                    </Row>
         </Container>
         </Container>
         </>
