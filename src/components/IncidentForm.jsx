@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import api from "../drf.js";
 import NavBar from "../components/NavBar.jsx";
-import { Container, Form, Button } from "react-bootstrap";
+import { Container, Form, Button, Alert } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
 function IncidentForm({ mode }) {
@@ -14,6 +14,9 @@ function IncidentForm({ mode }) {
 
   const createIncident = (e) => {
     e.preventDefault();
+    if (!validateForm()) {
+      return;
+    }
     api
       .post(
         "/incident/create/",
@@ -26,7 +29,7 @@ function IncidentForm({ mode }) {
         },
       )
       .then((res) => {
-        if (res.status === 201) alert("Incident created");
+        if (res.status === 201) navigate(`/incident/${res.data.id}`);
         else alert("Failed to create incident");
       })
       .catch((error) => alert(error));
@@ -110,6 +113,38 @@ function IncidentForm({ mode }) {
         console.error("Error deleting incident:", error);
       });
   };
+
+  // Form Validation
+  const [errors, setErrors] = useState({});
+
+const validateForm = () => {
+  let newErrors = {};
+
+  // Add validation for location
+  if (!location) {
+    newErrors.location = 'Location is required';
+  }
+
+  // Add validation for incident_category
+  if (!incident_category || incident_category === 'Choose...') {
+    newErrors.incident_category = 'Please select a valid incident category';
+  }
+
+  // Add validation for received_on
+  if (!received_on) {
+    newErrors.received_on = 'Received on is required';
+  }
+
+  // Add validation for details
+  if (!details) {
+    newErrors.details = 'Details are required';
+  }
+
+  setErrors(newErrors);
+
+  // If no errors, return true, else return false
+  return Object.keys(newErrors).length === 0;
+};
   return (
     <>
       <NavBar />
@@ -125,12 +160,14 @@ function IncidentForm({ mode }) {
               value={location}
               onChange={(e) => setLocation(e.target.value)}
             />
+            {errors.location && <Alert>{errors.location}</Alert>}
             <Form.Label>Incident Catergory:</Form.Label>
             <Form.Select
               name="incident_category"
               value={incident_category}
               onChange={(e) => setIncidentCategory(e.target.value)}
             >
+              <option>Choose...</option>
               <option value="Fly Tipping">Fly Tipping</option>
               <option value="Noise Pollution">Noise Pollution</option>
               <option value="Abandoned Vehicle">Abandoned Vehicle</option>
@@ -155,6 +192,7 @@ function IncidentForm({ mode }) {
                 ASB (Anti-Social Behaviour)
               </option>
             </Form.Select>
+            {errors.incident_category && <Alert>{errors.incident_category}</Alert>}
             <Form.Label>Received on:</Form.Label>
             <Form.Control
               type="date"
@@ -162,6 +200,7 @@ function IncidentForm({ mode }) {
               value={formatDate(received_on)}
               onChange={(e) => setReceivedOn(e.target.value)}
             />
+            {errors.received_on && <Alert>{errors.received_on}</Alert>}
             <Form.Label>Details:</Form.Label>
             <Form.Control
               as="textarea"
@@ -170,6 +209,7 @@ function IncidentForm({ mode }) {
               value={details}
               onChange={(e) => setDetails(e.target.value)}
             />
+            {errors.details && <Alert>{errors.details}</Alert>}
             <Form.Label>Closed on:</Form.Label>
             <Form.Control
               type="date"
