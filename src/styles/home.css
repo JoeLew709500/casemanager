@@ -1,0 +1,97 @@
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+.flex-wrapper{
+    flex:1;
+    align-items: start;
+}
+
+.container-sub-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.navbar-color-custom {
+    background-color: rgb(210, 210, 200) !important;
+}
+
+#search-form {
+    padding: 5px 5px 0 0;
+    justify-content: flex-start;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+footer {
+    background-color: rgb(210, 210, 200);
+    padding: 10px 0;
+    text-align: center;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.social-nets i {
+    color: rgb(45, 45, 45);
+    font-size: 30px;
+    margin: 0 5px;
+}
+
+#hero-image {
+    margin-bottom: 10px;
+  }
+
+#flytip {
+    height: 500px;
+    float: left;
+    border-radius: 10px;
+    margin: 0 10px 10px 0;
+  }
+
+#intro-para {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+    height: 400px;
+  }
+
+ @media screen and (max-width: 991px){
+    #search-form {
+        padding: 5px 0 0 0;
+        display: grid;
+        justify-content: inherit;
+    }
+
+    #search-form * {
+        width: 100%;
+        box-sizing: border-box;
+    }
+ }
+
+ @media screen and (max-width: 768px){
+    .combined-buttons {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+    }
+
+    #flytip {
+        float: none;
+        margin: auto;
+        width: 100%;
+        height:auto;
+    }
+    
+ }

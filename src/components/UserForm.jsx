@@ -36,28 +36,29 @@ function UserForm({ route, method }) {
   return (
     <>
     <Container className="flex-column d-flex">
+      <Container>
       <Form onSubmit={handleSubmit} className="col-md-4">
         <h1>{name}</h1>
-        <Row>
+        <Form.Group className="mb-2">
           <input
             type="text"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             placeholder="Username"
           />
-        </Row>
-        <Row>
+        </Form.Group>
+        
+        <Form.Group className="mb-2">
           <input
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Password"
           />
-        </Row>
-        <Row>
+        </Form.Group>
           <Button type="submit">{name}</Button>
-        </Row>
       </Form>
+    </Container>
     </Container>
     </>
   );
