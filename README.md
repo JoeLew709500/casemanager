@@ -80,6 +80,15 @@ The project will be completed in phases, with each phase focusing on a specific 
 
 ## Features & UX Design
 
+Button Colour Conventions:
+
+* Green Button - Navigate deeper into system
+* Grey Button - Navigate back
+* Red Button - Delete
+* Blue Button - POST create/update
+
+I chose rgb(210, 210, 200) for the footer and NavBar as I think this back ground with a dark colour for the font makes the website very professional and formal looking which suits the audience I am targeting
+
 ### NavBar
 ![NavBar](./src/assets/readmefile/navbar.png)
 
@@ -135,7 +144,7 @@ The original wireframes show a footer on all pages but as stated above this was 
 ### Incidents
 | Test | Pass Criteria | Result | Comments
 | --- | --- | --- | --- |
-| Table | Display incidents and clicking on a row takes you to that incident
+| Table | Display incidents and clicking on a row takes you to that incident | Pass
 | New Incident Button | Renders new incident | Pass | 
 
 ### Incident
@@ -151,7 +160,7 @@ The original wireframes show a footer on all pages but as stated above this was 
 ### Actions
 | Test | Pass Criteria | Result | Comments
 | --- | --- | --- | --- |
-| Table | Display Actions and clicking on a row takes you to that action
+| Table | Display Actions and clicking on a row takes you to that action | Pass
 | Back to incident | Renders incident | Pass | 
 | New Action Button | Renders new action | Pass | 
 
@@ -167,7 +176,7 @@ The original wireframes show a footer on all pages but as stated above this was 
 ### Actions
 | Test | Pass Criteria | Result | Comments
 | --- | --- | --- | --- |
-| Gallery | Display action photos
+| Gallery | Display action photos | Pass
 | Back to action | Renders action | Pass | 
 | Delete Button | Deletes photo | Pass | 
 | Form | Accepts upload photo and updates database on submit | Pass
