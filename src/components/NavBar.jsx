@@ -5,6 +5,7 @@ import { jwtDecode } from "jwt-decode";
 import { ACCESS_TOKEN } from "../constants.js";
 import api from "../drf.js";
 import { useEffect, useState } from "react";
+import "../styles/home.css"
 
 const NavBar = () => {
   let [username, setUsername] = useState("");
@@ -31,7 +32,7 @@ const NavBar = () => {
   }, []);
 
   return (
-    <Navbar className="bg-body-tertiary" expand="lg">
+    <Navbar style={{backgroundColor: "rgb(210, 210, 200)"}} data-bs-theme="light" expand="lg">
       <Container>
         <Navbar.Brand href="/">Case Manager</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />

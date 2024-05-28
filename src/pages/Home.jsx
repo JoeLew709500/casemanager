@@ -2,6 +2,7 @@ import NavBar from "../components/NavBar";
 import { Container } from "react-bootstrap";
 import "../styles/home.css"
 import flytipImage from "../assets/flytip.jpg"
+import Footer from "../components/Footer";
 
 const Home = () => {
     return <>
@@ -19,6 +20,7 @@ const Home = () => {
         </div>
     </div>
     </Container>
+    <Footer/>
     </>
 }
 
