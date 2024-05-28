@@ -44,13 +44,18 @@ The purpose of this project is to develop a web application that allows users to
 - Fully functional web application deployed on Heroku.
 - Comprehensive documentation including setup instructions, user guide, and developer guide.
 
-#### 6. Timeline
+#### 6. Timeline and User Stories
 The project will be completed in phases, with each phase focusing on a specific set of features. The estimated timeline is as follows:
-- Phase 1 (User Authentication)
-- Phase 2 
-- Phase 3 
-- Phase 4 
-- Phase 5 
+- [Phase 1 (User Authentication)](https://github.com/JoeLew709500/casemanagerdrf/issues/1)
+![Phase 1](./src/assets/readmefile/stage1.png)
+- [Phase 2 (Navigation)](https://github.com/JoeLew709500/casemanager/issues/1)
+![Phase 2](./src/assets/readmefile/stage2.png)
+- [Phase 3 (Incidents)](https://github.com/JoeLew709500/casemanager/issues/2)
+![Phase 3](./src/assets/readmefile/stage3.png)
+- [Phase 4 (Actions)](https://github.com/JoeLew709500/casemanager/issues/3)
+![Phase 4](./src/assets/readmefile/stage4.png)
+- Phase 5 (Review and refine)
+![Phase 5](./src/assets/readmefile/stage5.png)
 
 ## Technologies used
 
@@ -62,10 +67,10 @@ The project will be completed in phases, with each phase focusing on a specific 
 - Vite
 
 ### Libraries
-- React Bootstrap
-- jwt-decode
-- serve
-- axios
+- React Bootstrap - used throughout application for faster development
+- jwt-decode - used to display the username in the NavBar
+- serve - fix for Vite deployment in Heroku
+- axios - used for the api
 
 
 ## Features
@@ -73,7 +78,7 @@ The project will be completed in phases, with each phase focusing on a specific 
 ### NavBar
 ![NavBar](./src/assets/readmefile/navbar.png)
 
-The NavBar is on all pages, helping the user navigate the website easily, as well as indicating the logged in user on the top right.
+The NavBar is on all pages from one component, helping the user navigate the website easily, as well as indicating the logged in user on the top right.
 
 ### Incidents List
 ![Incidents List](./src/assets/readmefile/incidents.png)
@@ -103,7 +108,94 @@ This is the action photos page which lets users view add and delete photos to th
 ## UX Design
 
 ## Testing
+### Navigation
+| Test | Pass Criteria | Result | Comments
+| --- | --- | --- | --- |
+| Case Manager Brand | Renders home | Pass | Needed to repair link from '#' to '/'
+| Home | Renders home | Pass | 
+| Drop down -user | show user name if logged in | Pass | 
+| Drop down -logout | logout user and show only if user logged in | Pass | 
+| Drop down -login | display logout link if user not logged in and render login | Pass | 
+| Drop down -register | display logout link if user not logged in and render register  | Pass | 
+| Incidents | Renders Incident List | Pass | 
+
+### Incidents
+| Test | Pass Criteria | Result | Comments
+| --- | --- | --- | --- |
+| Table | Display incidents and clicking on a row takes you to that incident
+| New Incident Button | Renders new incident | Pass | 
+
+### Incident
+| Test | Pass Criteria | Result | Comments
+| --- | --- | --- | --- |
+| Form | Display incident details | Pass
+| Form Validation | If form not completed correctly provides feed back to user | Pass | 
+| Delete Incident Button | Deletes incident | Pass | 
+| Update Button | Updates Incident incident | Pass | 
+| Actions Button | Renders actions | Pass | 
+
+
+### Actions
+| Test | Pass Criteria | Result | Comments
+| --- | --- | --- | --- |
+| Table | Display Actions and clicking on a row takes you to that action
+| Back to incident | Renders incident | Pass | 
+| New Action Button | Renders new action | Pass | 
+
+### Action
+| Test | Pass Criteria | Result | Comments
+| --- | --- | --- | --- |
+| Form | Display action details | Pass
+| Form Validation | If form not completed correctly provides feed back to user | Pass | 
+| Delete Action Button | Deletes Action | Pass | 
+| Update Button | Updates Action | Pass | 
+| Photo Button | Renders Photos | Pass |
+
+### Actions
+| Test | Pass Criteria | Result | Comments
+| --- | --- | --- | --- |
+| Gallery | Display action photos
+| Back to action | Renders action | Pass | 
+| Delete Button | Deletes photo | Pass | 
+| Form | Accepts upload photo and updates database on submit | Pass
 
 ## Deployment
+
+### Backend
+To deploy the backend please follow the instructions on this [link](https://github.com/JoeLew709500/casemanagerdrf)
+
+### Frontend
+Heroku used as the debloyment service.
+
+In order to deploy this app I went to Heroku https:heroku.com/apps
+
+1. Create a New App
+
+    Click new and create new app.
+
+2. Name and Region
+
+    Choose a name and the region
+
+
+3. Deploy Tab
+
+    Click Deploy Tab
+
+
+4. Connect to Github
+
+    Connect to Github so we can choose our repository to deploy.
+Search repository by name
+
+5. Configure environment
+
+    Go to the settings tab, reveal config vars and enter the following 
+
+* VITE_API_URL: 'your backend url' (Make sure you've allowed this host to access this api)
+* VITE_CLOUDINARY_CLOUD_URL: 'If using cloudinary enter this https://res.cloudinary.com/-your site name- if your using another cloud storage service check to see the responce of the api is missing the full url if so add this missing part of the url if not enter an empty string
+
+6. Deployment
+    Go back to the deploy tab scroll down and click deploy
 
 ## Credits
