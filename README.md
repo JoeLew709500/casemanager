@@ -1,11 +1,12 @@
 # Project 5 Case Manager
 
+[Link to live site hosted by heroku](https://project-5-react-ci-214ec78c6a84.herokuapp.com/)
+
 ## Table of content
 1) [About](#about)
 2) [Project](#project)
 3) [Technologies used](#technologies-used)
-4) [Features](#features)
-5) [UX Design](#ux-design)
+4) [Features and UX Design](#features--ux-design)
 6) [Testing](#testing)
 7) [Deployment](#deployment)
 8) [Credits](#credits)
@@ -16,13 +17,13 @@ This Case Manager web application allows users to create incidents relating to U
 Users will then be able to create 'actions' which will record what the user has done for each incident and then be able to attach any relevant photos related to that action.
 
 ## Project
-### Scope of Work for Fly-Tipping Incident Tracking Application
+### Scope of Work for Incident Tracking Application
 
 #### 1. Overview
 The purpose of this project is to develop a web application that allows users to track and manage Public Protection incidents. The application will provide features for creating incidents, recording actions taken, and attaching relevant photos.
 
 #### 2. Objectives
-- Provide a user-friendly interface for creating and managing fly-tipping incidents.
+- Provide a user-friendly interface for creating and managing incidents.
 - Enable users to record actions taken for each incident.
 - Allow users to attach photos related to each action.
 - Implement a robust backend for storing and retrieving incident data.
@@ -65,15 +66,19 @@ The project will be completed in phases, with each phase focusing on a specific 
 - HTML
 - CSS
 - Vite
+- Elephant SQL (Backend)
+- Cloudinary (Backend)
+- Heroku
 
 ### Libraries
 - React Bootstrap - used throughout application for faster development
 - jwt-decode - used to display the username in the NavBar
 - serve - fix for Vite deployment in Heroku
 - axios - used for the api
+- Font Awesome - used for footer icons
 
 
-## Features
+## Features & UX Design
 
 ### NavBar
 ![NavBar](./src/assets/readmefile/navbar.png)
@@ -105,7 +110,15 @@ This is the action detail page where users can create delete and update actions.
 
 This is the action photos page which lets users view add and delete photos to the linked action
 
-## UX Design
+### Footer
+
+The footer has only been implemented for the home page as once the user is logged in this will give them the most screen space to focus on their work.
+
+### Wireframe
+
+The original wireframes show a footer on all pages but as stated above this was removed to give the most screen space to the user.
+
+![Wireframe](./src/assets/readmefile/wireframes.png)
 
 ## Testing
 ### Navigation
@@ -199,3 +212,11 @@ Search repository by name
     Go back to the deploy tab scroll down and click deploy
 
 ## Credits
+
+
+I would like to give credit to the following:
+
+- [React](https://legacy.reactjs.org/docs/getting-started.html) documentation
+- [React Bootstrap](https://react-bootstrap.netlify.app/) documetation
+- [techwithtim](https://github.com/techwithtim/Django-React-Full-Stack-App) for his repo on how he manages JWP token authentication with between Django and React
+- The StackOverFlow community for general debugging
